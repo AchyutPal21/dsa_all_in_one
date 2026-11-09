@@ -1,0 +1,47 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build active file",
+			"type": "shell",
+			"command": "mkdir -p \"${workspaceFolder}/.build/${relativeFileDirname}\" && /usr/bin/clang++ -std=c++17 -g -O0 -Wall -Wextra -Wshadow -fsanitize=address,undefined -fno-omit-frame-pointer -fdiagnostics-color=always \"${file}\" -o \"${workspaceFolder}/.build/${relativeFileDirname}/${fileBasenameNoExtension}\"",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared",
+				"clear": true
+			},
+			"detail": "Compile current file into .build/<same folders>/<name>"
+		},
+		{
+			"label": "build & run active file",
+			"type": "shell",
+			"command": "\"${workspaceFolder}/.build/${relativeFileDirname}/${fileBasenameNoExtension}\"",
+			"dependsOn": "build active file",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"clear": false
+			},
+			"detail": "Compile then run in the terminal (type input there)"
+		},
+		{
+			"label": "clean .build",
+			"type": "shell",
+			"command": "rm -rf \"${workspaceFolder}/.build\" && mkdir -p \"${workspaceFolder}/.build\"",
+			"problemMatcher": []
+		}
+	]
+}

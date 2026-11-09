@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/.build/${relativeFileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${fileDirname}",
+      "MIMode": "lldb",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "preLaunchTask": "build active file"
+    },
+    {
+      "name": "Debug active file (with cin input)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/.build/${relativeFileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "cwd": "${fileDirname}",
+      "MIMode": "lldb",
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "preLaunchTask": "build active file"
+    }
+  ]
+}

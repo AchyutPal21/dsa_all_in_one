@@ -1,0 +1,19 @@
+{
+  "files.exclude": {
+    "**/.build": false,
+    "**/*.dSYM": true
+  },
+  "search.exclude": {
+    "**/.build": true
+  },
+  "files.associations": {
+    "*.cpp": "cpp"
+  },
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 100 }",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "C_Cpp.debugShortcut": false
+}
