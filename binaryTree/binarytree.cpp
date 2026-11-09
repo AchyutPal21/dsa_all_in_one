@@ -31,6 +31,7 @@ class BinaryTree {
 
     void addRightNode(Node* parent, Node* child) { parent->rightNode = child; }
 
+    // DFS (In-Order Traversal)
     void inOrderDisp(Node* ptr) {
         if (!ptr) return;
         inOrderDisp(ptr->leftNode);
@@ -38,6 +39,30 @@ class BinaryTree {
         inOrderDisp(ptr->rightNode);
     }
 
+    // Iterative In-Order Traversal
+    void inOrderIterative() {
+        stack<Node*> s;
+        Node* curr = root;
+
+        while (curr != nullptr || !s.empty()) {
+            // Reach the leftmost node of the current node
+            while (curr != nullptr) {
+                s.push(curr);
+                curr = curr->leftNode;
+            }
+
+            // Current must be null at this point, so pop from stack
+            curr = s.top();
+            s.pop();
+
+            cout << curr->val << " ";
+
+            // We have visited the node and its left subtree. Now, do the right subtree.
+            curr = curr->rightNode;
+        }
+    }
+
+    // DFS (Pre-Order Traversal)
     void preOrderDisp(Node* ptr) {
         if (!ptr) return;
         cout << ptr->val << " ";
@@ -45,6 +70,29 @@ class BinaryTree {
         preOrderDisp(ptr->rightNode);
     }
 
+    // Iterative Pre-Order Traversal
+    void preOrderIterative() {
+        if (!root) return;
+        stack<Node*> s;
+        s.push(root);
+
+        while (!s.empty()) {
+            Node* curr = s.top();
+            s.pop();
+
+            cout << curr->val << " ";
+
+            // Push right first so that left is processed first (LIFO order)
+            if (curr->rightNode != nullptr) {
+                s.push(curr->rightNode);
+            }
+            if (curr->leftNode != nullptr) {
+                s.push(curr->leftNode);
+            }
+        }
+    }
+
+    // DFS (Post-Order Traversal)
     void postOrderDisp(Node* ptr) {
         if (!ptr) return;
         postOrderDisp(ptr->leftNode);
@@ -52,6 +100,36 @@ class BinaryTree {
         cout << ptr->val << " ";
     }
 
+    // Iterative Post-Order Traversal
+    void postOrderIterative() {
+        if (!root) return;
+
+        stack<Node*> s1;
+        stack<Node*> s2;
+        s1.push(root);
+
+        while (!s1.empty()) {
+            Node* curr = s1.top();
+            s1.pop();
+            s2.push(curr);
+
+            // Push left first, then right onto s1
+            if (curr->leftNode != nullptr) {
+                s1.push(curr->leftNode);
+            }
+            if (curr->rightNode != nullptr) {
+                s1.push(curr->rightNode);
+            }
+        }
+
+        // Print elements from stack 2
+        while (!s2.empty()) {
+            cout << s2.top()->val << " ";
+            s2.pop();
+        }
+    }
+
+    // BFS (Level Order Traversal)
     void levelOrderDisp(Node* ptr) {
         queue<Node*> qNode;
 
@@ -125,12 +203,24 @@ int main() {
     bt.preOrderDisp(bt.getRootNode());
     cout << endl;
 
+    cout << "Pre-Order Iterative Traversal: ";
+    bt.preOrderIterative();
+    cout << endl;
+
     cout << "In-Order Traversal:   ";
     bt.inOrderDisp(bt.getRootNode());
     cout << endl;
 
+    cout << "In-Order Iterative Traversal: ";
+    bt.inOrderIterative();
+    cout << endl;
+
     cout << "Post-Order Traversal: ";
     bt.postOrderDisp(bt.getRootNode());
+    cout << endl;
+
+    cout << "Post-Order Iterative Traversal: ";
+    bt.postOrderIterative();
     cout << endl;
 
     cout << "Level-Order Traversal: ";
