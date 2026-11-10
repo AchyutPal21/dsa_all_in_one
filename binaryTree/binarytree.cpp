@@ -129,6 +129,30 @@ class BinaryTree {
         }
     }
 
+    // Iterative Post-Order Single Stack Traversal
+    void postOrderIterativeOpt() {
+        stack<Node*> s;
+        Node* curr{root};
+        Node* lastVisited{nullptr};
+
+        while (curr != nullptr || !s.empty()) {
+            if (curr != nullptr) {
+                s.push(curr);
+                curr = curr->leftNode;
+            } else {
+                Node* stackTopNode = s.top();
+
+                if (stackTopNode->rightNode != nullptr && stackTopNode->rightNode != lastVisited) {
+                    curr = stackTopNode->rightNode;
+                } else {
+                    cout << stackTopNode->val << " ";
+                    lastVisited = stackTopNode;
+                    s.pop();
+                }
+            }
+        }
+    }
+
     // BFS (Level Order Traversal)
     void levelOrderDisp(Node* ptr) {
         queue<Node*> qNode;
@@ -221,6 +245,10 @@ int main() {
 
     cout << "Post-Order Iterative Traversal: ";
     bt.postOrderIterative();
+    cout << endl;
+
+    cout << "Post-Order Iterative Traversal Single Stack: ";
+    bt.postOrderIterativeOpt();
     cout << endl;
 
     cout << "Level-Order Traversal: ";
